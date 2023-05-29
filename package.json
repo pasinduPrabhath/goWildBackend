@@ -1,0 +1,23 @@
+{
+  "name": "gowild",
+  "version": "1.0.0",
+  "description": "backend for the gowild platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "gowild"
+  ],
+  "author": "Pasindu",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": "18.16.0"
+  }
+}
