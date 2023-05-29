@@ -4,7 +4,7 @@
   "description": "backend for the gowild platform",
   "main": "app.js",
   "scripts": {
-    "start": "npm app.js"
+    "start": "node app.js"
   },
   "keywords": [
     "gowild"
