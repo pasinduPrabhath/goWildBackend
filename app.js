@@ -5,7 +5,7 @@ const userRouter = require('./api/user/user.router');
 app.use(express.json());
 
 app.use('/api/user', userRouter);
-app.listen(process.env.APP_PORT, () => {
-    console.log("Server up and running on PORT :", process.env.APP_PORT);
+app.listen(process.env.PORT, () => {
+    console.log("Server up and running on PORT :", process.env.PORT);
     }
 );
