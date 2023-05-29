@@ -1,11 +1,11 @@
 const {createPool} = require('mysql2');
 
 const pool = createPool({
-    port: 3306,
-    host: '127.0.0.1',
-    user: '',
-    password: '',
-    database : 'gowild',
+    port: process.env.DB_PORT,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database : process.env.MYSQL_DB,
     connectionLimit: 10
 });
 
