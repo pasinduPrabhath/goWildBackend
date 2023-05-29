@@ -6,6 +6,6 @@ app.use(express.json());
 
 app.use('/api/user', userRouter);
 app.listen(process.env.PORT, () => {//dfd
-    console.log("Server up and running on PORT :", process.env.PORT);
+    console.log("Servers up and running on PORT :", process.env.PORT);
     }
 );
