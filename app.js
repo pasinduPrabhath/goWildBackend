@@ -5,7 +5,7 @@ const userRouter = require('./api/user/user.router');
 app.use(express.json());
 
 app.use('/api/user', userRouter);
-app.listen(3000, () => {//dfd
-    console.log("Servers up and running on PORT :", 3000);
+app.listen(process.env.PORT, () => {//dfd
+    console.log("Servers up and running on PORT :", process.env.PORT);
     }
 );
