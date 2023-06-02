@@ -7,7 +7,7 @@ module.exports = {
             return callBack("First Name is required");
         }
         pool.query(
-            `insert into user(firstName,lastName,email,password,birthday,country,town,mobileNumber,gender,sp,nicNumber) values(?,?,?,?,?,?,?,?,?,?,?)`,
+            `insert into user(firstName,lastName,email,password,birthday,country,town,mobileNumber,gender,sp,nicNumber,timestamp) values(?,?,?,?,?,?,?,?,?,?,?,?)`,
             [
                 data.firstName,
                 data.lastName,
@@ -19,7 +19,8 @@ module.exports = {
                 data.mobileNumber,
                 data.gender,
                 data.sp,
-                data.nicNumber
+                data.nicNumber,
+                data.timestamp
             ],
             (error, results, fields) => {
                 if(error){
@@ -27,6 +28,6 @@ module.exports = {
                 }
                 return callBack(null, results);
             }
-        )
+        );
     },
 };
