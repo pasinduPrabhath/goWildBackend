@@ -1,4 +1,4 @@
-const {create} = require('./user.service');
+const {create, checkLoginEmail} = require('./user.service');
 
 module.exports = {
     createUser: (req, res) => {
@@ -12,6 +12,25 @@ module.exports = {
                 });
             }
             return res.status(200).json({
+                success: 1,
+                data: results
+            });
+        });
+    },
+    checkEmail: (req, res) => {
+        const body = req.body;
+        checkLoginEmail(body, (err, results) => {
+            if(err){
+                console.log(err);
+                return;
+            }
+            if(!results){
+                return res.json({
+                    success: 0,
+                    message: "Invalid email or password"
+                });
+            }
+            return res.json({
                 success: 1,
                 data: results
             });
