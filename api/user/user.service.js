@@ -44,7 +44,7 @@ module.exports = {
                 if(results.length > 0){
                     return callBack(null, results[0]);
                 }
-                // return callBack(null, results);
+                return callBack(null);
             }
         );
     }
