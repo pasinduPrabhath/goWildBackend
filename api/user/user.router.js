@@ -1,5 +1,5 @@
 const {
-    createUser,
+    createUser,checkEmail
 } = require('./user.controller');
 const router = require('express').Router();
 
