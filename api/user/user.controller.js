@@ -32,7 +32,7 @@ module.exports = {
             }
             return res.json({
                 success: 1,
-                data: results
+                data: "user logged in successfully"
             });
         });
     }
