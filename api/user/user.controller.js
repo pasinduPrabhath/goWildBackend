@@ -30,7 +30,7 @@ module.exports = {
                     message: "Invalid email or password"
                 });
             }
-            return res.json({
+            return res.status(200).json({
                 success: 1,
                 data: "user logged in successfully"
             });
