@@ -53,10 +53,17 @@ module.exports = {
         pool.query(
             `select count(*) as numberOfUsers from user`,
             (error, results, fields) => {
-                if(error){
-                    return callBack(error);
+                if (error) {
+                    if (typeof callBack === 'function') {
+                        return callBack(error);
+                    }
+                    console.error(error);
+                    return;
                 }
-                return callBack(null, results);
+                if (typeof callBack === 'function') {
+                    return callBack(null, results);
+                }
+                console.log(results);
             }
         );
     }
