@@ -63,7 +63,8 @@ module.exports = {
                 if (typeof callBack === 'function') {
                     return callBack(null, results);
                 }
-                return results;
+                console.log(results);
+                return callBack(null, results);
             }
         );
     }
