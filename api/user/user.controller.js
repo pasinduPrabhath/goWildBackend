@@ -32,7 +32,8 @@ module.exports = {
             }
             return res.status(200).json({
                 success: 1,
-                data: "user logged in successfully"
+                data: "user logged in successfully",
+                results: results[0].gender
             });
         });
     }

@@ -41,7 +41,7 @@ module.exports = {
                 if(error){
                     return callBack(error);
                 }
-                if(results.length > 0){
+                if(results.length == 1){
                     return callBack(null, results);
                 }
                 return callBack(null);
