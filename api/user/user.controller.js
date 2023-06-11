@@ -48,8 +48,7 @@ module.exports = {
             }
             return res.status(200).json({
                 success: 1,
-                data: results,
-                print: "Number of users in the system is " + results
+                data: results[0].numberOfUsers,
             });
         }
         );
