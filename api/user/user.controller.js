@@ -38,7 +38,7 @@ module.exports = {
         });
     },
     getTotalUsers: (req, res) => {
-        getNumberOfUsers((err, results) => {
+        getNumberOfUsers(null,(err, results) => {
             if(err){
                 console.log(err);
                 return res.status(500).json({
