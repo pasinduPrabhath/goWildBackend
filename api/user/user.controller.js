@@ -36,5 +36,19 @@ module.exports = {
                 role: results[0].userRole
             });
         });
+    },
+    getTotalUsers: (req, res) => {
+        getNumberOfUsers((err, results) => {
+            if(err){
+                console.log(err);
+                return;
+            }
+            return res.json({
+                success: 1,
+                data: results
+            });
+        }
+        );
     }
+
 }

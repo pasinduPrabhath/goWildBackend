@@ -48,5 +48,16 @@ module.exports = {
                 return callBack(null);
             }
         );
+    },
+    getNumberOfUsers: (data, callBack) => {
+        pool.query(
+            `select count(*) as numberOfUsers from user`,
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
     }
 };
