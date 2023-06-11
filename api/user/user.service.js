@@ -51,12 +51,12 @@ module.exports = {
     },
     getNumberOfUsers: (data, callBack) => {
         pool.query(
-            `select count(*) as numberOfUsers from user`,
+            `select * from user`,
             (error, results,fields) => {
                 if(error){
                     return callBack(error);
                 }
-                return callBack(null, results);
+                return callBack(null, results.length);
             }
         );
     }
