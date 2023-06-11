@@ -33,7 +33,7 @@ module.exports = {
             return res.status(200).json({
                 success: 1,
                 data: "user logged in successfully",
-                results: results[0].userRole
+                role: results[0].userRole
             });
         });
     }
