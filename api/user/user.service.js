@@ -38,19 +38,16 @@ module.exports = {
     },
     checkLoginEmail: (data, callBack) => {
         pool.query(
-            `select * from user where email=? && password=?`,
-            [
-                data.email,
-                data.password
-            ],
+            `SELECT * FROM user WHERE email = ?`,
+            [data.email],
             (error, results, fields) => {
-                if(error){
+                if (error) {
                     return callBack(error);
                 }
-                if(results.length == 1){
-                    return callBack(null, results);
+                if (results.length === 0) {
+                    return callBack(null, null);
                 }
-                return callBack(null);
+                return callBack(null, results);
             }
         );
     },
