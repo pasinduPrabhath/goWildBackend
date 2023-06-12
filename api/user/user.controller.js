@@ -30,12 +30,12 @@ module.exports = {
             console.log(err);
             return;
         }
-        // if (!results) {
-        //     return res.json({
-        //     success: 0,
-        //     message: 'Invalid email or password - results',
-        //     });
-        // }
+        if (!results) {
+            return res.json({
+            success: 0,
+            message: 'Invalid email or password - results',
+            });
+        }
         const user = results[0];
         console.log(user);
         console.log('saved one'+ password, + 'entered one' + user.password);
