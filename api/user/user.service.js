@@ -1,6 +1,6 @@
 const pool = require('../../config/database');
 const {get} = require('./user.router');
-
+const bcrypt = require('bcrypt');
 module.exports = {
     
     create: (data, callBack) => {
