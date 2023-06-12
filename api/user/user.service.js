@@ -3,9 +3,9 @@ const {get} = require('./user.router');
 
 module.exports = {
     create: (data, callBack) => {
-        if(!data.firstName){
-            return callBack("First Name is required");
-        }
+        // if(!data.firstName){
+        //     return callBack("First Name is required");
+        // }
         pool.query(
             `insert into user(firstName,lastName,email,password,birthday,country,town,mobileNumber,gender,sp,nicNumber,userRole,timestamp) values(?,?,?,?,?,?,?,?,?,?,?,?,?)`,
             [
