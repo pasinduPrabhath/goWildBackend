@@ -38,7 +38,7 @@ module.exports = {
         }
         const user = results[0];
         console.log(user);
-        console.log('saved one'+ password, + 'entered one' + user.password);
+        console.log('saved one'+ password + 'entered one' + user.password);
         const passwordMatch = bcrypt.compareSync(password, user.password);
         
         if (!passwordMatch) {
