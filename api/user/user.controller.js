@@ -37,8 +37,9 @@ module.exports = {
             });
         }
         const user = results[0];
-        const passwordMatch = bcrypt.compareSync(password, user.password);
         console.log('saved one'+ password, + 'entered one' + user.password);
+        const passwordMatch = bcrypt.compareSync(password, user.password);
+        
         if (!passwordMatch) {
             return res.json({
             success: 0,
