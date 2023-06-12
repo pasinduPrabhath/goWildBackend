@@ -4,11 +4,11 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
     createUser: (req, res) => {
-        const { firstName, email, password } = req.body;
+        const { firstName, lastName,birthday,country,town,mobileNumber,gender,email, password, nicNumber,sp, userRole} = req.body;
         const saltRounds = 10;
         const salt = bcrypt.genSaltSync(saltRounds);
         const encryptedPassword = bcrypt.hashSync(password, salt);
-        const body = { firstName, email, password: encryptedPassword };
+        const body = { firstName, email, password: encryptedPassword, lastName,birthday,country,town,mobileNumber,gender,email,nicNumber,sp, userRole};
         create(body, (err, results) => {
             if(err){
                 console.log(err);
