@@ -28,17 +28,18 @@ module.exports = {
         checkLoginEmail({ email }, (err, results) => {
         if (err) {
             console.log(err);
-            return;
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error"
+                });
         }
         if (!results) {
             return res.json({
             success: 0,
-            message: 'Invalid email or password - results',
+            message: 'Invalid email or password',
             });
         }
         const user = results[0];
-        console.log(user);
-        console.log('saved one'+ password + 'entered one' + user.password);
         const passwordMatch = bcrypt.compareSync(password, user.password);
         
         if (!passwordMatch) {
@@ -57,6 +58,14 @@ module.exports = {
 });
     },
     getTotalUsers: (req, res) => {
+        const token = req.headers.authorization.split(' ')[1];
+        jwt.verify(token, jwtSecret, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({
+                success: 0,
+                message: 'Invalid token',
+            });
+        }
         getNumberOfUsers(null,(err, results) => {
             if(err){
                 console.log(err);
@@ -70,9 +79,9 @@ module.exports = {
             });
         }
         );
-    },
-}
-function generateToken(user) {
+    });
+},
+generateToken(user) {
     const payload = {
         userId: user.id,
         email: user.email,
@@ -83,4 +92,4 @@ function generateToken(user) {
         expiresIn: '1h'
     };
     return jwt.sign(payload, secret, options);
-}
+}};
