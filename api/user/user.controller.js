@@ -1,6 +1,19 @@
 const {create, checkLoginEmail,getNumberOfUsers} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const secret = 'your_secret_key';
+function generateToken(user) {
+    const payload = {
+        userId: user.id,
+        email: user.email,
+        userRole: user.userRole
+    };
+    
+    const options = {
+        expiresIn: '1h'
+    };
+    return jwt.sign(payload, secret, options);
+}
 
 module.exports = {
     createUser: (req, res) => {
@@ -59,13 +72,13 @@ module.exports = {
     },
     getTotalUsers: (req, res) => {
         const token = req.headers.authorization.split(' ')[1];
-        jwt.verify(token, jwtSecret, (err, decoded) => {
-        if (err) {
-            return res.status(401).json({
-                success: 0,
-                message: 'Invalid token',
-            });
-        }
+        jwt.verify(token,secret, (err, decoded) => {
+            if (err) {
+                return res.status(401).json({
+                    success: 0,
+                    message: 'Invalid token'
+                });
+            }
         getNumberOfUsers(null,(err, results) => {
             if(err){
                 console.log(err);
@@ -77,19 +90,7 @@ module.exports = {
             return res.status(200).json({
                 userCount: results[0].numberOfUsers,
             });
-        }
-        );
+        });
     });
-},
-generateToken(user) {
-    const payload = {
-        userId: user.id,
-        email: user.email,
-        userRole: user.userRole
-    };
-    const secret = 'your_secret_key';
-    const options = {
-        expiresIn: '1h'
-    };
-    return jwt.sign(payload, secret, options);
-}};
+    }   
+}
