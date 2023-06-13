@@ -66,7 +66,7 @@ module.exports = {
             success: 1,
             data: 'user logged in successfully',
             role: user.userRole,
-            token,
+            token:token,
         });
 });
     },
