@@ -17,11 +17,11 @@ function generateToken(user) {
 
 module.exports = {
     createUser: (req, res) => {
-        const { firstName, lastName,birthday,country,town,mobileNumber,gender,email, password, nicNumber,sp, userRole} = req.body;
+        const { firstName, lastName,birthday,country,town,mobileNumber,gender,email, password, nicNumber,sp, userRole,userImage} = req.body;
         const saltRounds = 10;
         const salt = bcrypt.genSaltSync(saltRounds);
         const encryptedPassword = bcrypt.hashSync(password, salt);
-        const body = { firstName, email, password: encryptedPassword, lastName,birthday,country,town,mobileNumber,gender,email,nicNumber,sp, userRole};
+        const body = { firstName, email, password: encryptedPassword, lastName,birthday,country,town,mobileNumber,gender,email,nicNumber,sp, userRole,userImage};
         create(body, (err, results) => {
             if(err){
                 console.log(err);
