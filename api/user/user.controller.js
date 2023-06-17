@@ -35,7 +35,7 @@ module.exports = {
         } = req.body;
       
         // Check if user with the same email already exists in the database
-        checkLoginEmail(email, (err, results) => {
+        checkLoginEmail({ email }, (err, results) => {
           if (err) {
             console.log(err);
             return res.status(500).json({
