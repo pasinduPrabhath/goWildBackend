@@ -49,7 +49,7 @@ module.exports = {
               message: 'Email already exists',
             });
           }
-      
+      //
           if(results.length === 0){
           const saltRounds = 10;
           const salt = bcrypt.genSaltSync(saltRounds);
