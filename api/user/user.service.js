@@ -32,10 +32,10 @@ module.exports = {
             }
         );
     },
-    checkLoginEmail: (data, callBack) => {
+    checkLoginEmail: (email, callBack) => {
         pool.query(
             `SELECT * FROM user WHERE email = ?`,
-            [data.email],
+            [email],
             (error, results, fields) => {
                 if (error) {
                     return callBack(error);
