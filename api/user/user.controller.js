@@ -32,6 +32,7 @@ module.exports = {
           userRole,
           userImageFront,
           userImageRear,
+          timestamp
         } = req.body;
       
         // Check if user with the same email already exists in the database
@@ -69,6 +70,7 @@ module.exports = {
             userRole,
             userImageFront,
             userImageRear,
+            timestamp
           };
           create(body, (err, results) => {
             if (err) {
