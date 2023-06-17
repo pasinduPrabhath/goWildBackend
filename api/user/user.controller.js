@@ -50,7 +50,7 @@ module.exports = {
             });
           }
       
-          // If user with the same email does not exist, create a new user
+          if(results.length === 0){
           const saltRounds = 10;
           const salt = bcrypt.genSaltSync(saltRounds);
           const encryptedPassword = bcrypt.hashSync(password, salt);
@@ -83,7 +83,7 @@ module.exports = {
               data: results,
             });
           });
-        });
+        }});
       },
     checkEmail: (req, res) => {
         const { email, password } = req.body;
