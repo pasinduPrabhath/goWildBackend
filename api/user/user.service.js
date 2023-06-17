@@ -38,7 +38,7 @@ module.exports = {
             [email],
             (error, results, fields) => {
                 if (error) {
-                    return callBack(error);
+                    return callBack(error,null);
                 }
                 if (results.length === 0) {
                     return callBack(null, null);
