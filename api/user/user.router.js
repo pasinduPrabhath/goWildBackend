@@ -6,6 +6,6 @@ const router = require('express').Router();
 router.post('/register', createUser);
 router.post('/login', checkEmail);
 router.get('/totalUsers', getTotalUsers);
-router.post('/checkExistingEmail', checkExistingEmail);
+router.get('/checkExistingEmail', checkExistingEmail);
 
 module.exports = router;
