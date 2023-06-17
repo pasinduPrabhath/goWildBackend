@@ -41,8 +41,8 @@ module.exports = {
                     return callBack(error,null);
                 }
                 if (results.length === 0) {
-                    return callBack(null, null);
-                }
+                    return callBack(null, []); // Return an empty array if no results found
+                  }
                 return callBack(null, results);
             }
         );
