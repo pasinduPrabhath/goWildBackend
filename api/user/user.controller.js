@@ -1,7 +1,7 @@
 const {create, checkLoginEmail,getNumberOfUsers} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const secret = 'your_secret_key';
+const secret = 'gowildKey';
 function generateToken(user) {
     const payload = {
         userId: user.id,
