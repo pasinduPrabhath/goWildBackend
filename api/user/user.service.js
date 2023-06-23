@@ -65,5 +65,47 @@ module.exports = {
                 return callBack(null, results);
             }
         );
-    }
+    },
+    registerUser: (data, callBack) => {
+        pool.query(
+            `insert into user_details(firstName,lastName,email,password,birthday,country,town,mobileNumber,gender,timestamp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+            [
+                data.firstName,
+                data.lastName,
+                data.email,
+                data.password,
+                data.birthday,
+                data.country,
+                data.town,
+                data.mobileNumber,
+                data.gender,
+                data.timestamp
+            ],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    regServiceProvider: (data, callBack) => {
+        pool.query(
+            `insert into service_provider(user_id,nicNumber,user_id_img_front,user_id_img_rear,is_approved) values(?,?,?,?,?)`,
+            [
+                data.user_id,
+                data.nicNumber,
+                data.userImageFront,
+                data.userImageRear,
+                data.isApproved
+            ],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+
 };
