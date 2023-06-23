@@ -1,4 +1,4 @@
-const {create, checkLoginEmail,getNumberOfUsers,regServiceProvider,registerBasicUser} = require('./user.service');
+const {checkLoginEmail,getNumberOfUsers,regServiceProvider,registerBasicUser,getServProvDetails} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
@@ -45,7 +45,7 @@ module.exports = {
               message: 'Email already exists',
             });
           }
-      //
+
           if(results.length === 0){
           const saltRounds = 10;
           const salt = bcrypt.genSaltSync(saltRounds);
@@ -243,4 +243,28 @@ module.exports = {
               });
             }});
           },
+    getServiceProvider: (req, res) => {
+        // const token = req.headers.authorization.split(' ')[1];
+        // jwt.verify(token,secret, (err, decoded) => {
+        //     if (err) {
+        //         return res.status(401).json({
+        //             success: 0,
+        //             message: 'Invalid token'
+        //         });
+        //     }
+        //     }
+        getServProvDetails(null,(err, results) => {
+                if(err){
+                    console.log(err);
+                    return res.status(500).json({
+                        success: 0,
+                        message: "Database connection error",
+                    });
+                }
+                return res.status(200).json({
+                    serviceProvider: results,
+                });
+            });
+        // });
+    }
 };

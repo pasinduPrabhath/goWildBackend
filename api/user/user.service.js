@@ -1,32 +1,5 @@
 const pool = require('../../config/database');
 module.exports = {
-    
-    // create: (data, callBack) => {
-    //     if(!data.firstName){
-    //         return callBack("First Name is required");
-    //     }
-    //     pool.query(
-    //         `insert into user_details(firstName,lastName,email,password,birthday,country,town,mobileNumber,gender,sp,nicNumber,userRole,userImage_front,userImage_rear,timestamp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-    //         [
-    //             data.firstName,
-    //             data.lastName,
-    //             data.email,
-    //             data.password,
-    //             data.birthday,
-    //             data.country,
-    //             data.town,
-    //             data.mobileNumber,
-    //             data.gender,
-    //             data.timestamp
-    //         ],
-    //         (error, results, fields) => {
-    //             if(error){
-    //                 return callBack(error);
-    //             }
-    //             return callBack(null, results);
-    //         }
-    //     );
-    // },
     checkLoginEmail: (email, callBack) => {
         pool.query(
             `SELECT * FROM user_details WHERE email = ?`,
@@ -103,4 +76,26 @@ module.exports = {
         );
     },
 
+    getServProvDetails: (data, callBack) => {
+        pool.query(
+            `select *
+            FROM user_details
+            INNER JOIN service_provider
+            ON user_details.user_id = service_provider.user_id`,
+            (error, results) => {
+                if (error) {
+                    if (typeof callBack === 'function') {
+                        return callBack(error);
+                    }
+                    console.error(error);
+                    return;
+                }
+                if (typeof callBack === 'function') {
+                    return callBack(null, results);
+                }
+                console.log(results);
+                return callBack(null, results);
+            }
+        );
+    },
 };
