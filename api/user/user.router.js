@@ -9,4 +9,4 @@ router.get('/totalUsers', getTotalUsers);
 router.post('/checkExistingEmail', checkExistingEmail);
 router.post('/registerServiceProvider', registerServiceProvider);
 
-module.exports = router;
+module.exports = router;//
