@@ -16,22 +16,17 @@ function generateToken(user) {
 }
 
 module.exports = {
-    createUser: (req, res) => {
+    createClient: (req, res) => {
         const {
           firstName,
           lastName,
+          email,
+          password,
           birthday,
           country,
           town,
           mobileNumber,
           gender,
-          email,
-          password,
-          nicNumber,
-          sp,
-          userRole,
-          userImageFront,
-          userImageRear,
           timestamp
         } = req.body;
       
@@ -57,22 +52,17 @@ module.exports = {
           const encryptedPassword = bcrypt.hashSync(password, salt);
           const body = {
             firstName,
+            lastName,
             email,
             password: encryptedPassword,
-            lastName,
             birthday,
             country,
             town,
             mobileNumber,
             gender,
-            nicNumber,
-            sp,
-            userRole,
-            userImageFront,
-            userImageRear,
             timestamp
           };
-          create(body, (err, results) => {
+          registerBasicUser(body, (err, results) => {
             if (err) {
               console.log(err);
               return res.status(500).json({
@@ -87,7 +77,7 @@ module.exports = {
           });
         }});
       },
-    checkEmail: (req, res) => {
+    logInUser: (req, res) => {
         const { email, password } = req.body;
         checkLoginEmail(email , (err, results) => {
         if (err) {
