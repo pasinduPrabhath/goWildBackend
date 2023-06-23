@@ -66,9 +66,9 @@ module.exports = {
             }
         );
     },
-    registerUser: (data, callBack) => {
+    registerBasicUser: (data, callBack) => {
         pool.query(
-            `insert into user_details(firstName,lastName,email,password,birthday,country,town,mobileNumber,gender,timestamp) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+            `insert into user_details(firstName,lastName,email,password,birthday,country,town,mobileNumber,gender,timestamp) values(?,?,?,?,?,?,?,?,?,?)`,
             [
                 data.firstName,
                 data.lastName,
@@ -93,7 +93,7 @@ module.exports = {
         pool.query(
             `insert into service_provider(user_id,nicNumber,user_id_img_front,user_id_img_rear,is_approved) values(?,?,?,?,?)`,
             [
-                data.user_id,
+                data.userIdF,
                 data.nicNumber,
                 data.userImageFront,
                 data.userImageRear,

@@ -1,7 +1,7 @@
-const {create, checkLoginEmail,getNumberOfUsers,regServiceProvider} = require('./user.service');
+const {create, checkLoginEmail,getNumberOfUsers,regServiceProvider,registerBasicUser} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const secret = 'gowildKey';
+const secret = process.env.JWT_KEY;
 function generateToken(user) {
     const payload = {
         userId: user.id,
@@ -180,7 +180,6 @@ module.exports = {
             email,
             password,
             nicNumber,
-            userIdF,
             isApproved,
             userImageFront,
             userImageRear,
@@ -204,7 +203,7 @@ module.exports = {
         //
             if(results.length === 0){
             const saltRounds = 10;
-            userIdF;
+            var userIdF;
             const salt = bcrypt.genSaltSync(saltRounds);
             const encryptedPassword = bcrypt.hashSync(password, salt);
             const userBody = {
@@ -229,35 +228,29 @@ module.exports = {
                   });
                 }
                 userIdF = results.insertId;
-                return res.status(200).json({
-                  success: 1,
-                  data: results,
+                console.log(results);
+                const serviceProviderBody ={
+                    nicNumber,
+                    userIdF,
+                    userImageFront,
+                    userImageRear,
+                    isApproved,
+                };
+                regServiceProvider(serviceProviderBody,(err, results)=>{
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json({
+                          success: 0,
+                          message: 'Database connection error',
+                        });
+                      }
+                      return res.status(200).json({
+                        success: 1,
+                        data: results,
+    
+                    });
                 });
               });
-              const serviceProviderBody ={
-                nicNumber,
-                userId : userIdF,
-                userImageFront,
-                userImageRear,
-                isApproved,
-            };
-            registerServiceProvider(serviceProviderBody,(err, results)=>{
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({
-                      success: 0,
-                      message: 'Database connection error',
-                    });
-                  }
-                  return res.status(200).json({
-                    success: 1,
-                    data: results,
-
-            });
-            
-          });
-        };
-
-    });
-    },
+            }});
+          },
 };
