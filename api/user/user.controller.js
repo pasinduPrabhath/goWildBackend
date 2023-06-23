@@ -116,7 +116,7 @@ module.exports = {
         return res.status(200).json({
             success: 1,
             data: 'user logged in successfully',
-            role: user.userRole,
+            // role: user.userRole,
             token:token,
         });
 });
