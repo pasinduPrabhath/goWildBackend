@@ -78,7 +78,7 @@ module.exports = {
 
     getServProvDetails: (data, callBack) => {
         pool.query(
-            `select *
+            `select user_details.firstName,user_details.lastName,user_details.country,user_details.email,user_details.birthday,user_details.town,user_details.gender,service_provider.nicNumber,service_provider.user_id_img_front,service_provider.user_id_img_rear,service_provider.is_approved 
             FROM user_details
             INNER JOIN service_provider
             ON user_details.user_id = service_provider.user_id`,
