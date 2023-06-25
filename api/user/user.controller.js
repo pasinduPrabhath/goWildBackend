@@ -268,7 +268,7 @@ module.exports = {
         // });
     },
     approveServiceProvider: (req, res) => {
-        const { userId } = req.body;
+        const { userId } = req.body.userId;
         approveTheServiceProvider(userId,(err, results) => {
             if(err){
                 console.log(err);
