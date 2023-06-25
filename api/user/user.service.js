@@ -98,15 +98,15 @@ module.exports = {
             }
         );
     },
-    approveTheServiceProvider: (userId, callBack) => {
-        if (!userId) {
+    approveTheServiceProvider: (data, callBack) => {
+        if (!data.userId) {
             return callBack(new Error('userId is undefined'));
           }
         pool.query(
             `update service_provider set is_approved = approvalStatus where user_id = ?,?`,
             [
-                approvalStatus,
-                userId
+                data.approvalStatus,
+                data.userId
             ],
             (error, results, fields) => {
                 if(error){

@@ -268,8 +268,8 @@ module.exports = {
         // });
     },
     approveServiceProvider: (req, res) => {
-        const userId  = req.body.userID;
-        approveTheServiceProvider(userId,(err, results) => {
+        const body = {userId:req.body.userID,approvalStatus:req.body.approvalStatus};
+        approveTheServiceProvider(body,(err, results) => {
             if(err){
                 console.log(err);
                 return res.status(500).json({
