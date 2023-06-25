@@ -103,7 +103,7 @@ module.exports = {
             return callBack(new Error('userId is undefined'));
           }
         pool.query(
-            `update service_provider set is_approved = ? where user_id = ?,?`,
+            `update service_provider set is_approved = ? where user_id = ?`,
             [
                 data.approvalStatus,
                 data.userId
