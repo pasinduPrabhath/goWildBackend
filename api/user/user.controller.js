@@ -269,7 +269,7 @@ module.exports = {
     },
     approveServiceProvider: (req, res) => {
         const { userId } = req.body;
-        approveServProv(userId,(err, results) => {
+        approveTheServiceProvider(userId,(err, results) => {
             if(err){
                 console.log(err);
                 return res.status(500).json({
