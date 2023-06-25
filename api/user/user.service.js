@@ -98,4 +98,18 @@ module.exports = {
             }
         );
     },
+    approveTheServiceProvider: (data, callBack) => {
+        pool.query(
+            `update service_provider set is_approved = 1 where user_id = ?`,
+            [
+                data.userId
+            ],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    }
 };

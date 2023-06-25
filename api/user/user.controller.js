@@ -1,4 +1,4 @@
-const {checkLoginEmail,getNumberOfUsers,regServiceProvider,registerBasicUser,getServProvDetails} = require('./user.service');
+const {checkLoginEmail,getNumberOfUsers,regServiceProvider,registerBasicUser,getServProvDetails,approveTheServiceProvider} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
@@ -266,5 +266,20 @@ module.exports = {
                 });
             });
         // });
+    },
+    approveServiceProvider: (req, res) => {
+        const { userId } = req.body;
+        approveServProv(userId,(err, results) => {
+            if(err){
+                console.log(err);
+                return res.status(500).json({
+                    success: 0,
+                    message: "Database connection error",
+                });
+            }
+            return res.status(200).json({
+                result: updated,
+            });
+        });
     }
 };
