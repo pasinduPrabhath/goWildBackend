@@ -10,7 +10,7 @@ app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter );
 app.use('/api/serviceProvider', serviceProviderRouter);
 
-app.listen(process.env.PORT, () => {//dfd
+app.listen(process.env.PORT, () => {
     console.log("Servers up and running on PORT :", process.env.PORT);
     }
 );

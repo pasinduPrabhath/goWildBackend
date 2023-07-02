@@ -1,4 +1,4 @@
-const{getNumberOfUsers,getServProvDetails,approveTheServiceProvider} = require('./admin.service.js');
+const{getNumberOfUsers,getServProvDetails,approveTheServiceProvider,deleteDeclinedEntry} = require('./admin.service.js');
 const secret = process.env.JWT_KEY;
 const jwt = require('jsonwebtoken');
 
@@ -66,5 +66,19 @@ approveServiceProvider: (req, res) => {
             result: "updated",
         });
     });
-}
+},
+deleteTheDeclinedEntry: (req, res) => {
+    const body = {userId:req.body.userID};
+    deleteDeclinedEntry(body,(err, results) => {
+        if(err){
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error",
+            });
+        }
+        return res.status(200).json({
+            result: "deleted",
+        });
+    });}
 };

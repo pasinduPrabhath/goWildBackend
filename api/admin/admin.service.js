@@ -60,5 +60,22 @@ approveTheServiceProvider: (data, callBack) => {
             return callBack(null, results);
         }
     );
-}
+},
+deleteDeclinedEntry: (data, callBack) => {
+    if (!data.userId) {
+        return callBack(new Error('userId is undefined'));
+        }
+    pool.query(
+        `delete from user_details where user_id = ?`,
+        [
+            data.userId
+        ],
+        (error, results, fields) => {
+            if(error){
+                return callBack(error);
+            }
+            return callBack(null, results);
+        }
+    );
+    },
 };
