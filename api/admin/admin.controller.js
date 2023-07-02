@@ -1,4 +1,4 @@
-const{getNumberOfUsers,getServProvDetails} = require('./admin.service.js');
+const{getNumberOfUsers,getServProvDetails,approveTheServiceProvider} = require('./admin.service.js');
 const secret = process.env.JWT_KEY;
 const jwt = require('jsonwebtoken');
 
@@ -50,5 +50,21 @@ getServiceProvider: (req, res) => {
             });
         });
     // });
+
 },
+approveServiceProvider: (req, res) => {
+    const body = {approvalStatus:req.body.approvalStatus,userId:req.body.userID};
+    approveTheServiceProvider(body,(err, results) => {
+        if(err){
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error",
+            });
+        }
+        return res.status(200).json({
+            result: "updated",
+        });
+    });
+}
 };

@@ -1,7 +1,6 @@
 const {
-    createClient,logInUser,checkExistingEmail,registerServiceProvider,approveServiceProvider
-} = require('./user.controller');
-const{getTotalUsers,getServiceProvider} = require('../admin/admin.controller');
+    createClient,logInUser,checkExistingEmail,registerServiceProvider} = require('./user.controller');
+const{getTotalUsers,getServiceProvider,approveServiceProvider} = require('../admin/admin.controller');
 const router = require('express').Router();
 
 router.post('/registerClient', createClient);

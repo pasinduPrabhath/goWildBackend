@@ -42,4 +42,23 @@ getServProvDetails: (data, callBack) => {
         }
     );
 },
+
+approveTheServiceProvider: (data, callBack) => {
+    if (!data.userId) {
+        return callBack(new Error('userId is undefined'));
+      }
+    pool.query(
+        `update service_provider set is_approved = ? where user_id = ?`,
+        [
+            data.approvalStatus,
+            data.userId
+        ],
+        (error, results, fields) => {
+            if(error){
+                return callBack(error);
+            }
+            return callBack(null, results);
+        }
+    );
+}
 };

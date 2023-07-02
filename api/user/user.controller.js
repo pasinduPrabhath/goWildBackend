@@ -222,19 +222,5 @@ module.exports = {
             }});
           },
 
-    approveServiceProvider: (req, res) => {
-        const body = {approvalStatus:req.body.approvalStatus,userId:req.body.userID};
-        approveTheServiceProvider(body,(err, results) => {
-            if(err){
-                console.log(err);
-                return res.status(500).json({
-                    success: 0,
-                    message: "Database connection error",
-                });
-            }
-            return res.status(200).json({
-                result: "updated",
-            });
-        });
-    }
+    
 };
