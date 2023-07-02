@@ -1,5 +1,5 @@
-const {regServiceProvider} = require('./serviceProvider.services');
-const{checkLoginEmail,registerBasicUser} = require('../client/user.service');
+const {regServiceProvider} = require('./serviceProvider.services.js');
+const{checkLoginEmail,registerBasicUser} = require('../client/user.service.js');
 const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 module.exports = {
