@@ -1,4 +1,4 @@
-const {checkLoginEmail,getNumberOfUsers,regServiceProvider,registerBasicUser,getServProvDetails,approveTheServiceProvider} = require('./user.service');
+const {checkLoginEmail,regServiceProvider,registerBasicUser,getServProvDetails,approveTheServiceProvider} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
