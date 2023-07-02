@@ -1,5 +1,6 @@
 const{getNumberOfUsers} = require('./admin.service.js');
 const secret = process.env.JWT_KEY;
+const jwt = require('jsonwebtoken');
 
 module.exports = {
 
