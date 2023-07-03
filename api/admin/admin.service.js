@@ -19,9 +19,9 @@ getNumberOfUsers: (data, callBack) => {
         }
     );
 },
-getNumberOfClients: (data, callBack) => {
+getNumberOfProviders: (data, callBack) => {
     pool.query(
-        `select count(*) as numberOfClients from service_provider`,
+        `select count(*) as numberOfProviders from service_provider`,
         (error, results, fields) => {
             if (error) {
                 if (typeof callBack === 'function') {

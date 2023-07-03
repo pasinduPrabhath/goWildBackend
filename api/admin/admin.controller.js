@@ -1,4 +1,4 @@
-const{getNumberOfUsers,getServProvDetails,approveTheServiceProvider,deleteDeclinedEntry,getNumberOfClients} = require('./admin.service.js');
+const{getNumberOfUsers,getServProvDetails,approveTheServiceProvider,deleteDeclinedEntry,getNumberOfProviders} = require('./admin.service.js');
 const secret = process.env.JWT_KEY;
 const jwt = require('jsonwebtoken');
 
@@ -28,6 +28,30 @@ getNumberOfUsers(null,(err, results) => {
 });
 
 },
+getTotalServiceProviders: (req, res) => {
+    //     const token = req.headers.authorization.split(' ')[1];
+    //     jwt.verify(token,secret, (err, decoded) => {
+    //         if (err) {
+    //             return res.status(401).json({
+    //                 success: 0,
+    //                 message: 'Invalid token'
+    //             });
+    //         }
+    // });
+    getNumberOfProviders(null,(err, results) => {
+        if(err){
+            console.log(err);
+            return res.status(500).json({
+                success: 0,
+                message: "Database connection error",
+            });
+        }
+        return res.status(200).json({
+            userCount: results[0].numberOfProviders,
+        });
+    });
+    
+    },
 getServiceProvider: (req, res) => {
     // const token = req.headers.authorization.split(' ')[1];
     // jwt.verify(token,secret, (err, decoded) => {
