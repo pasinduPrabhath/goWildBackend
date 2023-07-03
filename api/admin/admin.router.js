@@ -6,4 +6,4 @@ router.get('/getServiceProvider', getServiceProvider);
 router.get('/getTotalServiceProviders', getTotalServiceProviders);
 router.post('/approveServiceProvider', approveServiceProvider);
 router.post('/deleteDeclinedEntry', deleteTheDeclinedEntry);
-module.exports = router;s
+module.exports = router;
