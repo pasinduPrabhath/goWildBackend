@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 router.get('/totalUsers', getTotalUsers);
 router.get('/getServiceProvider', getServiceProvider);
-router.get('/getServiceProvider', getTotalServiceProviders);
+router.get('/getTotalServiceProviders', getTotalServiceProviders);
 router.post('/approveServiceProvider', approveServiceProvider);
 router.post('/deleteDeclinedEntry', deleteTheDeclinedEntry);
-module.exports = router;
+module.exports = router;s
