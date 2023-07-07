@@ -44,9 +44,17 @@ module.exports = {
             `select firstName,lastName from user_details where email = ?`,
             [data.email],
             (error, results, fields) => {
-                if(error){
-                    return callBack(error);
+                if (error) {
+                    if (typeof callBack === 'function') {
+                        return callBack(error);
+                    }
+                    console.error(error);
+                    return;
                 }
+                if (typeof callBack === 'function') {
+                    return callBack(null, results);
+                }
+                console.log(results);
                 return callBack(null, results);
             }
         );

@@ -144,12 +144,12 @@ module.exports = {
                 console.log(err);
                 return;
             }
-            if (!results) {
-                return res.json({
-                    success: 0,
-                    message: 'Record not Found',
-                });
-            }
+            // if (!results) {
+            //     return res.json({
+            //         success: 0,
+            //         message: 'Record not Found',
+            //     });
+            // }
             return res.status(200).json({
                 success: 1,
                 data: results,
