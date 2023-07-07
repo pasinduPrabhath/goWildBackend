@@ -1,4 +1,4 @@
-const {checkLoginEmail,registerBasicUser,getUserDetail} = require('./user.service');
+const {checkLoginEmail,registerBasicUser,getUserDetail,setUserProfilePicture} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
@@ -140,6 +140,25 @@ module.exports = {
     getUserDetailsForProfile: (req, res) => {
         const { email } = req.body;
         getUserDetail(email, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            if (results.length === 0) {
+                return res.json({
+                    success: 0,
+                    message: 'Record not Found',
+                });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results,
+            });
+        });
+    },
+    setProfilePicture: (req, res) => {
+        const { email, profilePicture } = req.body;
+        setUserProfilePicture(email, profilePicture, (err, results) => {
             if (err) {
                 console.log(err);
                 return;

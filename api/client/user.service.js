@@ -58,6 +58,21 @@ module.exports = {
             return callBack(null, results);
             }
         );
+    },
+    setUserProfilePicture: (email, userImage, callBack) => {
+        pool.query(
+            `update user_details set profile_picture_url = ? where email = ?`,
+            [
+                userImage,
+                email
+            ],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
     }
     
 };
