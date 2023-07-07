@@ -40,9 +40,10 @@ module.exports = {
         );
     },
     getUserDetail : (data, callBack) => {
+        const email = data.email.trim();
         pool.query(
             `select firstName,lastName from user_details where email = ?`,
-            [data.email],
+            [email],
             (error, results, fields) => {
                 if (error) {
                     return callBack(error);
