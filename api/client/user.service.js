@@ -45,17 +45,14 @@ module.exports = {
             [data.email],
             (error, results, fields) => {
                 if (error) {
-                    if (typeof callBack === 'function') {
-                        return callBack(error);
-                    }
-                    console.error(error);
-                    return;
-                }
-                if (typeof callBack === 'function') {
-                    return callBack(null, results);
-                }
-                console.log(results);
-                return callBack(null, results);
+                    return callBack(error);
+                  }
+                  if (results.length === 0) {
+                    const error = new Error('User not found');
+                    error.statusCode = 404;
+                    return callBack(error);
+                  }
+                  return callBack(null, results);
             }
         );
     }
