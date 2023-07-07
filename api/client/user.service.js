@@ -39,8 +39,8 @@ module.exports = {
             }
         );
     },
-    getUserDetail : (data, callBack) => {
-        const email = data.email.trim();
+    getUserDetail : (email, callBack) => {
+        // const email = data.email.trim();
         pool.query(
             `select firstName,lastName from user_details where email = ?`,
             [email],
