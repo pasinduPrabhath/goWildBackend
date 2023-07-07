@@ -61,7 +61,7 @@ module.exports = {
     },
     setUserProfilePicture: (email, userImage, callBack) => {
         pool.query(
-            `update user_details set profile_picture_url = ? where email = ?`,
+            `update user_profile set profile_picture_url = ? where email = ?`,
             [
                 userImage,
                 email
