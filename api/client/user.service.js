@@ -39,4 +39,17 @@ module.exports = {
             }
         );
     },
+    getUserDetail : (data, callBack) => {
+        pool.query(
+            `select firstName,lastName from user_details where email = ?`,
+            [data.email],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    }
+    
 };

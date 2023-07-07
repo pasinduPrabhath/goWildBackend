@@ -1,4 +1,4 @@
-const {checkLoginEmail,registerBasicUser} = require('./user.service');
+const {checkLoginEmail,registerBasicUser,getUserDetail} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
@@ -137,6 +137,25 @@ module.exports = {
         });
     },
     
+    getUserDetailsForProfile: (req, res) => {
+        const { email } = req.body;
+        getUserDetail(email, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            if (!results) {
+                return res.json({
+                    success: 0,
+                    message: 'Record not Found',
+                });
+            }
+            return res.json({
+                success: 1,
+                data: results,
+            });
+        });
+    }
 
     
 };
