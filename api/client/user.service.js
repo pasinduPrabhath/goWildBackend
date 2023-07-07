@@ -40,20 +40,22 @@ module.exports = {
         );
     },
     getUserDetail : (email, callBack) => {
-        // const email = data.email.trim();
         pool.query(
             `select firstName,lastName from user_details where email = ?`,
             [email],
             (error, results, fields) => {
-                if (error) {
+               if (error) {
+                if (typeof callBack === 'function') {
                     return callBack(error);
-                  }
-                  if (results.length === 0) {
-                    const error = new Error('User not found');
-                    error.statusCode = 404;
-                    return callBack(error);
-                  }
-                  return callBack(null, results);
+                }
+                console.error(error);
+                return;
+            }
+            if (typeof callBack === 'function') {
+                return callBack(null, results);
+            }
+            console.log(results);
+            return callBack(null, results);
             }
         );
     }
