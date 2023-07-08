@@ -61,7 +61,7 @@ module.exports = {
     },
     setUserProfilePicture: (userId, userImage, callBack) => {
         pool.query(
-            `insert into user_profile (user_id,profile_picture) values (?,?)`,
+            `insert into user_profile (user_id,profile_picture_url) values (?,?)`,
             [
                 userId,
                 userImage
