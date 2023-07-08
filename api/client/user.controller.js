@@ -164,17 +164,17 @@ module.exports = {
             console.log(err);
             return;
         }
-        if (results.length === 0) {
+        if (results.length === 1) {
             return res.json({
                 success: 0,
-                message: 'Record not Found',
+                message: 'There is already a profile picture',
             });
         }
         // return res.status(200).json({
         //     success: 1,
         //     data: results,
         // });
-    
+    else{
          userId = results[0].user_id;
 
         
@@ -193,7 +193,7 @@ module.exports = {
                 success: 1,
                 data: results,
             });
-        });
+        });}
     });},
     
 };
