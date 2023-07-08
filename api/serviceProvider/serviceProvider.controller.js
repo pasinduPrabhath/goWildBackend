@@ -18,6 +18,7 @@ registerServiceProvider: (req, res) => {
         isApproved,
         userImageFront,
         userImageRear,
+        profPicUrl,
         timestamp
       } = req.body;
 
@@ -71,7 +72,7 @@ registerServiceProvider: (req, res) => {
                 userImageRear,
                 isApproved,
             }
-            setProfilePicture(userIdF, userImage,(err, results) => {
+            setProfilePicture(userIdF, profPicUrl,(err, results) => {
                 if (err) {
                   console.log(err);
                   return res.status(500).json({
