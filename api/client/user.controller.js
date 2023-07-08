@@ -183,10 +183,6 @@ module.exports = {
                 message: 'Record not Found',
             });
         }
-        // return res.status(200).json({
-        //     success: 1,
-        //     data: results,
-        // });
     
          userId = results[0].user_id;
 

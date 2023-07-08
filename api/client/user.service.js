@@ -1,4 +1,5 @@
 const pool = require('../../config/database');
+const { get } = require('./user.router');
 module.exports = {
     checkLoginEmail: (email, callBack) => {
         pool.query(
@@ -41,7 +42,11 @@ module.exports = {
     },
     getUserDetail : (email, callBack) => {
         pool.query(
-            `select firstName,lastName,user_id from user_details where email = ?`,
+            `select user_details.firstName,user_details.lastName,user_details.user_id,user_profile.profile_picture_url 
+            from user_details 
+            inner join user_profile
+            on user_details.user_id = user_profile.user_id
+            where email = ?`,
             [email],
             (error, results, fields) => {
                if (error) {
@@ -73,6 +78,19 @@ module.exports = {
                 return callBack(null, results);
             }
         );
+    },
+    getProfilePicture: (userId, callBack) => {
+        pool.query(
+            `select profile_picture_url from user_profile where user_id = ?`,
+            [userId],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
     }
+
     
 };

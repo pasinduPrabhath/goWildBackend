@@ -64,7 +64,7 @@ registerServiceProvider: (req, res) => {
               });
             }
             userIdF = results.insertId;
-            console.log(results);
+            // console.log(results);
             const serviceProviderBody ={
                 nicNumber,
                 userIdF,
