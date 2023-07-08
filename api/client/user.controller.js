@@ -75,7 +75,7 @@ module.exports = {
            
          
           userId = results.insertId;
-          setProfilePicture(results, profPicUrl,(err, results) => {
+          setProfilePicture(userId, profPicUrl,(err, results) => {
             if (err) {
               console.log(err);
               return res.status(500).json({
