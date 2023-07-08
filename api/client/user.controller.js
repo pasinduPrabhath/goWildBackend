@@ -174,7 +174,7 @@ module.exports = {
         //     success: 1,
         //     data: results,
         // });
-    else{
+    
          userId = results[0].user_id;
 
         
@@ -193,7 +193,7 @@ module.exports = {
                 success: 1,
                 data: results,
             });
-        });}
+        });
     });},
     
 };
