@@ -41,7 +41,7 @@ module.exports = {
     },
     getUserDetail : (email, callBack) => {
         pool.query(
-            `select firstName,lastName from user_details where email = ?`,
+            `select firstName,lastName,user_id from user_details where email = ?`,
             [email],
             (error, results, fields) => {
                if (error) {

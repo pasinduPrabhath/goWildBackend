@@ -157,8 +157,27 @@ module.exports = {
         });
     },
     setProfilePicture: (req, res) => {
-        const { email, profilePicture } = req.body;
-        setUserProfilePicture(email, profilePicture, (err, results) => {
+      const { email,profilePicture } = req.body;
+      getUserDetail(email, (err, results) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        if (results.length === 0) {
+            return res.json({
+                success: 0,
+                message: 'Record not Found',
+            });
+        }
+        return res.status(200).json({
+            success: 1,
+            data: results,
+        });
+    });
+        const userId = results[0].id;
+
+        
+        setUserProfilePicture(userId, profilePicture, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
