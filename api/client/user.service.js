@@ -61,10 +61,10 @@ module.exports = {
     },
     setUserProfilePicture: (userId, userImage, callBack) => {
         pool.query(
-            `update user_profile set profile_picture_url = ? where user_id = ?`,
+            `insert into user_profile (user_id,profile_picture) values (?,?)`,
             [
-                userImage,
-                userId
+                userId,
+                userImage
             ],
             (error, results, fields) => {
                 if(error){
