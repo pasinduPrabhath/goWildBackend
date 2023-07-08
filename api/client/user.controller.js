@@ -158,6 +158,7 @@ module.exports = {
     },
     setProfilePicture: (req, res) => {
       const { email,profilePicture } = req.body;
+      
       getUserDetail(email, (err, results) => {
         if (err) {
             console.log(err);
@@ -169,12 +170,12 @@ module.exports = {
                 message: 'Record not Found',
             });
         }
-        return res.status(200).json({
-            success: 1,
-            data: results,
-        });
-    });
-        const userId = results[0].id;
+        // return res.status(200).json({
+        //     success: 1,
+        //     data: results,
+        // });
+    
+         userId = results[0].id;
 
         
         setUserProfilePicture(userId, profilePicture, (err, results) => {
@@ -193,7 +194,6 @@ module.exports = {
                 data: results,
             });
         });
-    }
-
+    });},
     
 };
