@@ -175,7 +175,7 @@ module.exports = {
         //     data: results,
         // });
     
-         userId = results[0].id;
+         userId = results[0].user_id;
 
         
         setUserProfilePicture(userId, profilePicture, (err, results) => {
