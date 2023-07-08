@@ -1,5 +1,5 @@
 const {regServiceProvider} = require('./serviceProvider.services.js');
-const{checkLoginEmail,registerBasicUser} = require('../client/user.service.js');
+const{checkLoginEmail,registerBasicUser,setProfilePicture} = require('../client/user.service.js');
 const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 module.exports = {
@@ -70,7 +70,15 @@ registerServiceProvider: (req, res) => {
                 userImageFront,
                 userImageRear,
                 isApproved,
-            };
+            }
+            setProfilePicture(userIdF, userImage,(err, results) => {
+                if (err) {
+                  console.log(err);
+                  return res.status(500).json({
+                    success: 0,
+                    message: 'Database connection error',
+                  });
+                }
             regServiceProvider(serviceProviderBody,(err, results)=>{
                 if (err) {
                     console.log(err);
@@ -86,5 +94,6 @@ registerServiceProvider: (req, res) => {
                 });
             });
           });
-        }});
+        });}
+        });
       },};
