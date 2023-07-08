@@ -72,11 +72,8 @@ module.exports = {
                 message: 'Database connection error',
               });
             }
-            return res.status(200).json({
-              success: 1,
-              data: results,
-            });
-          });
+           
+         
           userId = results.insertId;
           setProfilePicture(results, profPicUrl,(err, results) => {
             if (err) {
@@ -91,8 +88,8 @@ module.exports = {
               data: results,
             });
           },);
-        }});
-      },
+        });
+      }});},
     logInUser: (req, res) => {
         const { email, password } = req.body;
         checkLoginEmail(email , (err, results) => {
