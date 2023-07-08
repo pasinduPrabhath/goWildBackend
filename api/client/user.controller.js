@@ -1,4 +1,4 @@
-const {checkLoginEmail,registerBasicUser,getUserDetail,setUserProfilePicture} = require('./user.service');
+const {checkLoginEmail,registerBasicUser,getUserDetail,setProfilePicture} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
@@ -27,6 +27,7 @@ module.exports = {
           town,
           mobileNumber,
           gender,
+          profPicUrl,
           timestamp
         } = req.body;
       
@@ -60,6 +61,7 @@ module.exports = {
             town,
             mobileNumber,
             gender,
+            
             timestamp
           };
           registerBasicUser(body, (err, results) => {
@@ -75,6 +77,20 @@ module.exports = {
               data: results,
             });
           });
+          userId = results.insertId;
+          setProfilePicture(results, profPicUrl,(err, results) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).json({
+                success: 0,
+                message: 'Database connection error',
+              });
+            }
+            return res.status(200).json({
+              success: 1,
+              data: results,
+            });
+          },);
         }});
       },
     logInUser: (req, res) => {
@@ -156,7 +172,7 @@ module.exports = {
             });
         });
     },
-    setProfilePicture: (req, res) => {
+    updateProfilePicture: (req, res) => {
       const { email,profilePicture } = req.body;
       
       getUserDetail(email, (err, results) => {
@@ -164,10 +180,10 @@ module.exports = {
             console.log(err);
             return;
         }
-        if (results.length === 1) {
+        if (results.length === 0) {
             return res.json({
                 success: 0,
-                message: 'There is already a profile picture',
+                message: 'Record not Found',
             });
         }
         // return res.status(200).json({
@@ -178,22 +194,22 @@ module.exports = {
          userId = results[0].user_id;
 
         
-        setUserProfilePicture(userId, profilePicture, (err, results) => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            if (results.length === 0) {
-                return res.json({
-                    success: 0,
-                    message: 'Record not Found',
-                });
-            }
-            return res.status(200).json({
-                success: 1,
-                data: results,
-            });
-        });
+        //  updateProfilePicture(userId, profilePicture, (err, results) => {
+        //     if (err) {
+        //         console.log(err);
+        //         return;
+        //     }
+        //     if (results.length === 0) {
+        //         return res.json({
+        //             success: 0,
+        //             message: 'Record not Found',
+        //         });
+        //     }
+        //     return res.status(200).json({
+        //         success: 1,
+        //         data: results,
+        //     });
+        // });
     });},
     
 };

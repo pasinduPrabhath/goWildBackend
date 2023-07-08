@@ -1,4 +1,4 @@
-const {createClient,logInUser,checkExistingEmail,getUserDetailsForProfile,setProfilePicture} = require('./user.controller');
+const {createClient,logInUser,checkExistingEmail,getUserDetailsForProfile,updateProfilePicture} = require('./user.controller');
 
 const router = require('express').Router();
 
@@ -7,7 +7,8 @@ router.post('/login', logInUser);
 
 router.post('/checkExistingEmail', checkExistingEmail);
 router.post('/getUserDetailsForProfile', getUserDetailsForProfile);
-router.post('/setClientProfilePicture', setProfilePicture);
+router.post('/updateProfilePicture', updateProfilePicture);
+
 
 
 
