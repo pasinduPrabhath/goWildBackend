@@ -201,7 +201,7 @@ module.exports = {
           });
     },
     uploadPicture: (req, res) => {
-      const { email,profilePicture } = req.body;
+      const { email,postPicture } = req.body;
           getUserDetail(email, (err, results) => {
             if (err) {
                 console.log(err);
@@ -216,7 +216,7 @@ module.exports = {
         
              userId = results[0].user_id;
         
-             uploadPicture(userId, profilePicture,(err, results) => {
+             uploadPicture(userId, postPicture,(err, results) => {
               if (err) {
                 console.log(err);
                 return res.status(500).json({
