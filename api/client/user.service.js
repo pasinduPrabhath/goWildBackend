@@ -121,5 +121,17 @@ module.exports = {
             }
         );
     },
+    getUploadedPictures: (userId, callBack) => {
+        pool.query(
+            `select url from photo where user_id = ?`,
+            [userId],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
     
 };
