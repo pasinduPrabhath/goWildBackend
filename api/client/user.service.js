@@ -90,7 +90,22 @@ module.exports = {
                 return callBack(null, results);
             }
         );
-    }
+    },
+    updateProfilePicture: (userId, userImage, callBack) => {
+        pool.query(
+            `update user_profile set profile_picture_url = ? where user_id = ?`,
+            [
+                userImage,
+                userId
+            ],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
 
     
 };
