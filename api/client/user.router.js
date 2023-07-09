@@ -9,6 +9,6 @@ router.post('/checkExistingEmail', checkExistingEmail);
 router.post('/getUserDetailsForProfile', getUserDetailsForProfile);
 router.post('/updateProfilePicture', updateProfilePicture);
 router.post('/uploadPicture', uploadPicture);
-router.get('/getUploadedPictures', getUploadedPictures);
+router.post('/getUploadedPictures', getUploadedPictures);
 
 module.exports = router;
