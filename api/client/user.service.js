@@ -106,6 +106,20 @@ module.exports = {
             }
         );
     },
-
+    uploadPicture: (userId, userImage, callBack) => {
+        pool.query(
+            `insert into photo (user_id,url) values (?,?)`,
+            [
+                userId,
+                userImage
+            ],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
     
 };

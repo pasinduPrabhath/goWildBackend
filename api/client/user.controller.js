@@ -1,4 +1,4 @@
-const {checkLoginEmail,registerBasicUser,getUserDetail,setProfilePicture,updateProfilePicture} = require('./user.service');
+const {checkLoginEmail,registerBasicUser,getUserDetail,setProfilePicture,updateProfilePicture,uploadPicture} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
@@ -186,6 +186,37 @@ module.exports = {
              userId = results[0].user_id;
         
              updateProfilePicture(userId, profilePicture,(err, results) => {
+              if (err) {
+                console.log(err);
+                return res.status(500).json({
+                  success: 0,
+                  message: 'Database connection error',
+                });
+              }
+              return res.status(200).json({
+                success: 1,
+                data: results,
+              });
+            },);
+          });
+    },
+    uploadPicture: (req, res) => {
+      const { email,profilePicture } = req.body;
+          getUserDetail(email, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            if (results.length === 0) {
+                return res.json({
+                    success: 0,
+                    message: 'Record not Found',
+                });
+            }
+        
+             userId = results[0].user_id;
+        
+             uploadPicture(userId, profilePicture,(err, results) => {
               if (err) {
                 console.log(err);
                 return res.status(500).json({
