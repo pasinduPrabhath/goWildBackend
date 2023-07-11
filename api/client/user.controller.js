@@ -1,4 +1,4 @@
-const {checkLoginEmail,registerBasicUser,getUserDetail,setProfilePicture,updateProfilePicture,uploadPicture,getUploadedPictures} = require('./user.service');
+const {checkLoginEmail,registerBasicUser,getUserDetail,setProfilePicture,updateProfilePicture,uploadPicture,getUploadedPictures,getSearchResult} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
@@ -262,4 +262,20 @@ module.exports = {
         },);
       });
     },
+    getSearchResult: (req, res) => {
+      const { search } = req.body;
+      getSearchResult(search,(err, results) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({
+            success: 0,
+            message: 'Database connection error',
+          });
+        }
+        return res.status(200).json({
+          success: 1,
+          data: results,
+        });
+      },);
+    }
   }

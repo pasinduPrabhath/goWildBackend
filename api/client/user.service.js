@@ -133,5 +133,29 @@ module.exports = {
             }
         );
     },
+    getSearchResult: (searchString, callBack) => {
+        pool.query(
+            `select user_details.firstName,user_details.lastName,user_details.user_id,user_profile.profile_picture_url 
+            from user_details 
+            inner join user_profile
+            on user_details.user_id = user_profile.user_id
+            where firstName like ? or lastName like ?`,
+            [searchString,searchString],
+            (error, results, fields) => {
+               if (error) {
+                if (typeof callBack === 'function') {
+                    return callBack(error);
+                }
+                console.error(error);
+                return;
+            }
+            if (typeof callBack === 'function') {
+                return callBack(null, results);
+            }
+            console.log(results);
+            return callBack(null, results);
+            }
+        );
+    },
     
 };
