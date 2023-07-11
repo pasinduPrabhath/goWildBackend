@@ -139,8 +139,8 @@ module.exports = {
             from user_details 
             inner join user_profile
             on user_details.user_id = user_profile.user_id
-            where firstName like ? or lastName like ?`,
-            [searchString,searchString],
+            where firstName like ? or lastName like ? or email like ?`,
+            [searchString,searchString,searchString],
             (error, results, fields) => {
                if (error) {
                 if (typeof callBack === 'function') {
