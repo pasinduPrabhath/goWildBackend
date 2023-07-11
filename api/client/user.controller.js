@@ -264,7 +264,7 @@ module.exports = {
     },
     getSearchResult: (req, res) => {
       // const { search } = req.body;
-      const searchTerm = req.search || '';
+      const searchTerm = req.body.search || '';
       const params = [
         `%${searchTerm}%`,
         `%${searchTerm}%`,
