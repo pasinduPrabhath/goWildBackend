@@ -263,8 +263,17 @@ module.exports = {
       });
     },
     getSearchResult: (req, res) => {
-      const { search } = req.body;
-      getSearchResult(search,(err, results) => {
+      // const { search } = req.body;
+      const searchTerm = req.body || '';
+      const params = [
+        `%${searchTerm}%`,
+        `%${searchTerm}%`,
+        `%${searchTerm}%`,
+        `%${searchTerm}`,
+        `${searchTerm}%`,
+        `%${searchTerm}%`,
+      ];
+      getSearchResult(params,(err, results) => {
         if (err) {
           console.log(err);
           return res.status(500).json({

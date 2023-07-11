@@ -133,14 +133,15 @@ module.exports = {
             }
         );
     },
-    getSearchResult: (searchString, callBack) => {
+    getSearchResult: (params, callBack) => {
         pool.query(
             `select user_details.firstName,user_details.lastName,user_details.user_id,user_profile.profile_picture_url 
             from user_details 
             inner join user_profile
             on user_details.user_id = user_profile.user_id
-            where firstName like ? or lastName like ? or email like ?`,
-            [searchString,searchString,searchString],
+            where firstName like ? or lastName like ? or email like ?
+            OR firstName LIKE ? OR lastName LIKE ? OR email LIKE ?`,
+            params,
             (error, results, fields) => {
                if (error) {
                 if (typeof callBack === 'function') {
