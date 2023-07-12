@@ -135,7 +135,7 @@ module.exports = {
     },
     getSearchResult: (params, callBack) => {
         pool.query(
-            `select user_details.firstName,user_details.lastName,user_details.user_id,user_details.town,user_details.country,user_profile.profile_picture_url 
+            `select user_details.firstName,user_details.lastName,user_details.user_id,user_details.town,user_details.country,user_details.email,user_profile.profile_picture_url 
             from user_details 
             inner join user_profile
             on user_details.user_id = user_profile.user_id
