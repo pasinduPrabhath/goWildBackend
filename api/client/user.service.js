@@ -189,7 +189,7 @@ module.exports = {
         );
     },
     getFollowerStatus: (followerEmail, followingEmail,callBack) => {
-        pool.query('SELECT COUNT(*) AS count FROM follows WHERE follower_email = ? AND following_email = ?', 
+        pool.query('SELECT COUNT(*) AS count FROM user_relationship WHERE follower_email = ? AND following_email = ?', 
         [followerEmail, followingEmail], 
         (error, results, fields) => {
             if(error){
