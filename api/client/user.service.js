@@ -173,5 +173,32 @@ module.exports = {
             }
         );
     },
+    unfollowUser: (userId, followingId, callBack) => {
+        pool.query(
+            `delete from user_relationship where follower_id = ? and following_id = ?`,
+            [
+                userId,
+                followingId
+            ],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
+    getFollowerStatus: (userId, callBack) => {
+        pool.query('SELECT COUNT(*) AS count FROM follows WHERE follower_email = ? AND following_email = ?', 
+        [followerEmail, followingEmail], 
+        (error, results, fields) => {
+            if(error){
+                return callBack(error);
+            }
+            return callBack(null, results);
+        }
+        );
+    },
+    
     
 };

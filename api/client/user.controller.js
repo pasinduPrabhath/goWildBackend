@@ -1,4 +1,4 @@
-const {checkLoginEmail,registerBasicUser,getUserDetail,setProfilePicture,updateProfilePicture,uploadPicture,getUploadedPictures,getSearchResult,followUser} = require('./user.service');
+const {checkLoginEmail,registerBasicUser,getUserDetail,setProfilePicture,updateProfilePicture,uploadPicture,getUploadedPictures,getSearchResult,followUser,getFollowerStatus} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
@@ -334,5 +334,52 @@ module.exports = {
     },
     );
   },
+  getFollowerStatus: (req, res) => {
+    const { followerEmail,followingEmail } = req.body;
+        getUserDetail(followerEmail, (err, results) => {
+          if (err) {
+              console.log(err);
+              return;
+          }
+          if (results.length === 0) {
+              return res.json({
+                  success: 0,
+                  message: 'Record not Found',
+              });
+          }
+           userId = results[0].user_id;
+           getUserDetail(followingEmail, (err, results) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            if (results.length === 0) {
+                return res.json({
+                    success: 0,
+                    message: 'Record not Found',
+                });
+            }
+            followingId = results[0].user_id;
+      
+           getFollowerStatus(userId, followingId,(err, results) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).json({
+                success: 0,
+                message: 'Database connection error',
+              });
+            }
+          const count = results[0].count;
+          const isFollowing = count > 0;
+            return res.status(200).json({
+              success: 1,
+              followStatus: isFollowing,
+            });
+          },);
+        });
+  },
+  );
+},
+
 };
 
