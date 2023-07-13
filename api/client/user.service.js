@@ -188,7 +188,7 @@ module.exports = {
             }
         );
     },
-    getFollowerStatus: (userId, callBack) => {
+    getFollowerStatus: (followerEmail, followingEmail,callBack) => {
         pool.query('SELECT COUNT(*) AS count FROM follows WHERE follower_email = ? AND following_email = ?', 
         [followerEmail, followingEmail], 
         (error, results, fields) => {
