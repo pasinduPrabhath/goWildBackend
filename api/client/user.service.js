@@ -211,5 +211,17 @@ module.exports = {
             }
         );
     },
+    getFollowerCount: (userId, callBack) => {
+        pool.query(
+            `select count(*) as count from user_relationship where following_id = ?`,
+            [userId],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    }
     
 };
