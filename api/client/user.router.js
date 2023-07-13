@@ -1,4 +1,4 @@
-const {createClient,logInUser,checkExistingEmail,getUserDetailsForProfile,updateProfilePicture,uploadPicture,getUploadedPictures,getSearchResult,followUser,unfollowUser,getFollowerStatus,getFollowingCount} = require('./user.controller');
+const {createClient,logInUser,checkExistingEmail,getUserDetailsForProfile,updateProfilePicture,uploadPicture,getUploadedPictures,getSearchResult,followUser,unfollowUser,getFollowerStatus,getFollowingCount,getFollowerCount} = require('./user.controller');
 
 const router = require('express').Router();
 
@@ -15,5 +15,6 @@ router.post('/followUser', followUser);
 router.post('/unfollowUser', unfollowUser);
 router.post('/getFollowerStatus', getFollowerStatus);
 router.post('/getFollowingCount', getFollowingCount);
+router.post('/getFollowerCount', getFollowerCount);
 
 module.exports = router;
