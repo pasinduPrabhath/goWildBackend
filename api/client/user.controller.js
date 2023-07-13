@@ -288,7 +288,7 @@ module.exports = {
       },);
     },
     followUser: (req, res) => {
-      const { email,followingId } = req.body;
+      const { email,followingEmail } = req.body;
           getUserDetail(email, (err, results) => {
             if (err) {
                 console.log(err);
@@ -300,8 +300,21 @@ module.exports = {
                     message: 'Record not Found',
                 });
             }
+            
         
              userId = results[0].user_id;
+             getUserDetail(followingEmail, (err, results) => {
+              if (err) {
+                  console.log(err);
+                  return;
+              }
+              if (results.length === 0) {
+                  return res.json({
+                      success: 0,
+                      message: 'Record not Found',
+                  });
+              }
+              followingId = results[0].user_id;
         
              followUser(userId, followingId,(err, results) => {
               if (err) {
@@ -318,4 +331,7 @@ module.exports = {
             },);
           });
     },
-  }
+    );
+  },
+};
+
