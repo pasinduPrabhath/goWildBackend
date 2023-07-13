@@ -1,4 +1,4 @@
-const {checkLoginEmail,registerBasicUser,getUserDetail,setProfilePicture,updateProfilePicture,uploadPicture,getUploadedPictures,getSearchResult,followUser,getFollowerStatus} = require('./user.service');
+const {checkLoginEmail,registerBasicUser,getUserDetail,setProfilePicture,updateProfilePicture,uploadPicture,getUploadedPictures,getSearchResult,followUser,getFollowerStatus,unfollowUser} = require('./user.service');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_KEY;
@@ -334,6 +334,53 @@ module.exports = {
     },
     );
   },
+  unfollowUser: (req, res) => {
+    const { email,followingEmail } = req.body;
+        getUserDetail(email, (err, results) => {
+          if (err) {
+              console.log(err);
+              return;
+          }
+          if (results.length === 0) {
+              return res.json({
+                  success: 0,
+                  message: 'Record not Found',
+              });
+          }
+            userId = results[0].user_id;
+            getUserDetail(followingEmail, (err, results) => {
+              if (err) {
+                  console.log(err);
+                  return;
+              }
+              if (results.length === 0) {
+                  return res.json({
+                      success: 0,
+                      message: 'Record not Found',
+                  });
+              }
+              followingId = results[0].user_id;
+              unfollowUser(userId, followingId,(err, results) => {
+                if (err) {
+                  console.log(err);
+                  return res.status(500).json({
+                    success: 0,
+                    message: 'Database connection error',
+                  });
+                }
+                return res.status(200).json({
+                  success: 1,
+                  data: results,
+                  isFollowing: false,
+                });
+              },);
+            });
+      },
+      );
+  },
+
+
+
   getFollowerStatus: (req, res) => {
     const { followerEmail,followingEmail } = req.body;
         getUserDetail(followerEmail, (err, results) => {
