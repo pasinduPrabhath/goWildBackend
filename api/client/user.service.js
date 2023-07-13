@@ -158,5 +158,20 @@ module.exports = {
             }
         );
     },
+    followUser: (userId, followingId, callBack) => {
+        pool.query(
+            `insert into user_relationship (user_id,following_id) values (?,?)`,
+            [
+                userId,
+                followingId
+            ],
+            (error, results, fields) => {
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null, results);
+            }
+        );
+    },
     
 };

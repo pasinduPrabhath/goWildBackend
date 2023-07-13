@@ -1,4 +1,4 @@
-const {createClient,logInUser,checkExistingEmail,getUserDetailsForProfile,updateProfilePicture,uploadPicture,getUploadedPictures,getSearchResult} = require('./user.controller');
+const {createClient,logInUser,checkExistingEmail,getUserDetailsForProfile,updateProfilePicture,uploadPicture,getUploadedPictures,getSearchResult,followUser} = require('./user.controller');
 
 const router = require('express').Router();
 
@@ -11,5 +11,6 @@ router.post('/updateProfilePicture', updateProfilePicture);
 router.post('/uploadPicture', uploadPicture);
 router.post('/getUploadedPictures', getUploadedPictures);
 router.post('/getSearchResult', getSearchResult);
+router.post('/followUser', followUser);
 
 module.exports = router;
