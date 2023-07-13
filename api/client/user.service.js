@@ -160,7 +160,7 @@ module.exports = {
     },
     followUser: (userId, followingId, callBack) => {
         pool.query(
-            `insert into user_relationship (user_id,following_id) values (?,?)`,
+            `insert into user_relationship (follower_id,following_id) values (?,?)`,
             [
                 userId,
                 followingId
