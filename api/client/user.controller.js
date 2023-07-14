@@ -519,6 +519,65 @@ getFollowingCount: (req, res) => {
                   });
                 },);
               });
+            },
+  getUserDetails : (req, res) => {
+    const { email } = req.body;
+    getUserDetail(email, (err, results) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          success: 0,
+          message: 'Database connection error',
+        });
+      }
+      if (results.length === 0) {
+        return res.json({
+          success: 0,
+          message: 'Record not Found',
+        });
+      }
+  
+      const userId = results[0].user_id;
+  
+      getFollowingCount(userId, (err, followingCount) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).json({
+            success: 0,
+            message: 'Database connection error',
+          });
+        }
+  
+        getFollowerCount(userId, (err, followerCount) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).json({
+              success: 0,
+              message: 'Database connection error',
+            });
+          }
+  
+          getPostCount(userId, (err, postCount) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).json({
+                success: 0,
+                message: 'Database connection error',
+              });
             }
+  
+            return res.status(200).json({
+              success: 1,
+              data: {
+                followingCount,
+                followerCount,
+                postCount,
+              },
+            });
+          });
+        });
+      });
+    });
+  }
 };
 
