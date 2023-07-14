@@ -14,9 +14,6 @@ router.post('/getSearchResult', getSearchResult);
 router.post('/followUser', followUser);
 router.post('/unfollowUser', unfollowUser);
 router.post('/getFollowerStatus', getFollowerStatus);
-router.post('/getFollowingCount', getFollowingCount);
-router.post('/getFollowerCount', getFollowerCount);
-router.post('/getPostCount', getPostCount);
 router.post('/getUserDetails', getUserDetails);
 
 module.exports = router;
