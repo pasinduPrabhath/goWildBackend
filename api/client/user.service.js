@@ -222,6 +222,18 @@ module.exports = {
                 return callBack(null, results);
             }
         );
+    },
+    getPostCount:(userId,callBack)=>{
+        pool.query(
+            `select count(*) as count from photo where user_id = ?`,
+            [userId],
+            (error,results)=>{
+                if(error){
+                    return callBack(error);
+                }
+                return callBack(null,results);
+            }
+        )
     }
     
 };
